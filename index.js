@@ -3,6 +3,11 @@ const app=express();
 const port=8000;
 
 
+//use express router before server start
+
+app.use('/',require('./routes/index'));
+app.use('./profile', require('./routes/index'));
+
 
 
 
