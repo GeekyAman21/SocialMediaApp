@@ -7,7 +7,9 @@ console.log('inside routers');
 
 
 router.get('/', homeController.home );
-router.get('/profile', homeController.profile);
+router.use('/users', require('./users'));
+
+// router.get('/profile', homeController.profile);
 
 
 

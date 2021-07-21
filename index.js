@@ -5,8 +5,11 @@ const port=8000;
 
 //use express router before server start
 
-app.use('/',require('./routes/index'));
-app.use('./profile', require('./routes/index'));
+app.use('/',require('./routes')); //anything after localhost routes will be called
+
+//setup the view engine
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 
 
