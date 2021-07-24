@@ -1,4 +1,5 @@
-module.exports.home = function(req, res){
+module.exports.home = function(req, res){              //cookies are in req
+     console.log(req.cookies);
     return res.render('home',{
            title :"Home"
     });
