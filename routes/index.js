@@ -8,10 +8,10 @@ console.log('inside routers');
 
 router.get('/', homeController.home );
 console.log('i am here1');
-router.use('/users', require('./users'));
-console.log('i am here2');
-
-// router.get('/profile', homeController.profile);
+router.use('/users', require('./users')); //router on '/users' we will go to users.js
+router.use('/posts',require('./posts'));
+router.use('/comments', require('./comments'));
+router.use('/api',require('./api'));
 
 
 

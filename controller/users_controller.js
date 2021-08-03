@@ -3,10 +3,39 @@ const User = require('../models/user');
 
 
 module.exports.profile = function(req, res){
+    User.findById(req.params.id, function(err, user){
         res.render('user_profile', {
-            title: "User"
+            title: "User",
+            profile_user: user
         });
+    });
+      
 }
+module.exports.update = async function(req, res){
+    
+          try{
+               let user= await User.findById(req.params.id);
+               User.updoadedAvatar(req,res, function(){
+                   if(err){
+                       console.log('multer error',err);
+                   }
+                    // console.log(req.file);
+                    user.name=req.body.name;
+                    user.email=req.body.email;
+                    if(req.file){
+                        user.avatar=User.avatarPath + '/' + req.filename;
+                    }
+                         user.save();
+                         return res.redirect('back');
+               })
+          }
+           catch(err){
+                req.flash('error', err);
+                return res.redirect('back');
+           }
+
+ }
+
 
 module.exports.signUp = function(req, res){
     if(req.isAuthenticated()){
@@ -58,9 +87,11 @@ module.exports.create = function(req, res){
 }
 //sign in and create a session
 module.exports.createSession = function(req, res){
+    req.flash('success', 'Logged in Successfully');
   return res.redirect('/');
 }
 module.exports.destroySession = function(req, res){
        req.logout();
+       req.flash('success', 'Logged off Successfully');
     return res.redirect('/');
 }
